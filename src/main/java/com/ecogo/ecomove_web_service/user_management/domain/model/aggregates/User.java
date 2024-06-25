@@ -17,7 +17,7 @@ public class User extends AbstractAggregateRoot<User> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    private Long id;
+    private Long userId;
 
     /** The username of the user. */
     @Column(nullable = false)

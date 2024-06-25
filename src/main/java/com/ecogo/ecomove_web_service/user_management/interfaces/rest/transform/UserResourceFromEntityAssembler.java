@@ -5,6 +5,6 @@ import com.ecogo.ecomove_web_service.user_management.interfaces.rest.resources.U
 
 public class UserResourceFromEntityAssembler {
     public static UserResource fromEntity(User user) {
-        return new UserResource(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName());
+        return new UserResource(user.getUserId(), user.getUsername(), user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName());
     }
 }

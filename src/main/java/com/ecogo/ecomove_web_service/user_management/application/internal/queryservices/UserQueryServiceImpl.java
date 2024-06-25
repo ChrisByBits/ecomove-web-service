@@ -1,10 +1,9 @@
 package com.ecogo.ecomove_web_service.user_management.application.internal.queryservices;
 
 import com.ecogo.ecomove_web_service.user_management.domain.model.aggregates.User;
-import com.ecogo.ecomove_web_service.user_management.domain.model.queries.GetUserByIdQuery;
 import com.ecogo.ecomove_web_service.user_management.domain.model.queries.GetUserByUsernameQuery;
 import com.ecogo.ecomove_web_service.user_management.domain.services.UserQueryService;
-import com.ecogo.ecomove_web_service.user_management.infrastructure.persistence.jpa.UserRepository;
+import com.ecogo.ecomove_web_service.user_management.infrastructure.persistance.jpa.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,11 +20,6 @@ public class UserQueryServiceImpl implements UserQueryService {
     @Override
     public Optional<User> handle(GetUserByUsernameQuery query) {
         return userRepository.findByUsername(query.username());
-    }
-
-    @Override
-    public Optional<User> handle(GetUserByIdQuery query) {
-        return userRepository.findById(query.id());
     }
 
 }

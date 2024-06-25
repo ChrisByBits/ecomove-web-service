@@ -3,7 +3,7 @@ package com.ecogo.ecomove_web_service.user_management.application.internal.comma
 import com.ecogo.ecomove_web_service.user_management.domain.model.aggregates.User;
 import com.ecogo.ecomove_web_service.user_management.domain.model.commands.CreateUserCommand;
 import com.ecogo.ecomove_web_service.user_management.domain.services.UserCommandService;
-import com.ecogo.ecomove_web_service.user_management.infrastructure.persistence.jpa.UserRepository;
+import com.ecogo.ecomove_web_service.user_management.infrastructure.persistance.jpa.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,6 +21,7 @@ public class UserCommandServiceImpl implements UserCommandService {
         if(userRepository.existsByUsername(command.username())) {
             throw new IllegalArgumentException("username already exists");
         }
+
         User user = new User(command);
         return Optional.of(userRepository.save(user));
     }

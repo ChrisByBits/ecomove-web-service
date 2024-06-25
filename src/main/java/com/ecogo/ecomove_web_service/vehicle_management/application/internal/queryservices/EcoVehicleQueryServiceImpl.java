@@ -3,7 +3,7 @@ package com.ecogo.ecomove_web_service.vehicle_management.application.internal.qu
 import com.ecogo.ecomove_web_service.vehicle_management.domain.model.aggregates.EcoVehicle;
 import com.ecogo.ecomove_web_service.vehicle_management.domain.model.queries.*;
 import com.ecogo.ecomove_web_service.vehicle_management.domain.services.EcoVehicleQueryService;
-import com.ecogo.ecomove_web_service.vehicle_management.infrastructure.persistence.jpa.EcoVehicleRepository;
+import com.ecogo.ecomove_web_service.vehicle_management.infrastructure.persistance.jpa.EcoVehicleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
