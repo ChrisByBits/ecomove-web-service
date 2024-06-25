@@ -33,7 +33,7 @@ public class TicketCommandServiceImpl implements TicketCommandService {
         if(ticketRepository.existsByUserIdAndTitle(command.userId(), command.title())){
             throw new RuntimeException("A ticket with that title already exists for this user.");
         }
-        externalUserService.fetchUserById(command.userId()).map(user -> {
+        return externalUserService.fetchUserById(command.userId()).map(user -> {
             CustomerSupportAgent customerSupportAgent = customerSupportAgentRepository.findById(command.customerSupportAgentId())
                     .orElseThrow(() -> new RuntimeException("Customer Support Agent not found"));
             TicketCategory category = ticketCategoryRepository.findById(command.categoryId())
@@ -42,34 +42,31 @@ public class TicketCommandServiceImpl implements TicketCommandService {
             ticketRepository.save(ticket);
             return Optional.of(ticket);
         }).orElseThrow(()-> new RuntimeException("User not found"));
-        return Optional.empty();
     }
     @Override
     public Optional<Ticket> handle(CloseTicketCommand command){
-        ticketRepository.findById(command.ticketId()).map(ticket -> {
+        return ticketRepository.findById(command.ticketId()).map(ticket -> {
             ticket.close();
             ticketRepository.save(ticket);
             return Optional.of(ticket);
         }).orElseThrow(()->new RuntimeException("Ticket not found"));
-        return Optional.empty();
+
     }
     @Override
     public Optional<Ticket> handle(CancelTicketCommand command){
-        ticketRepository.findById(command.ticketId()).map(ticket -> {
+        return ticketRepository.findById(command.ticketId()).map(ticket -> {
             ticket.cancel();
             ticketRepository.save(ticket);
             return Optional.of(ticket);
         }).orElseThrow(()->new RuntimeException("Ticket not found"));
-        return Optional.empty();
     }
     @Override
     public Optional<Ticket> handle(SolveTicketCommand command){
-        ticketRepository.findById(command.ticketId()).map(ticket -> {
+        return ticketRepository.findById(command.ticketId()).map(ticket -> {
             ticket.solve();
             ticketRepository.save(ticket);
             return Optional.of(ticket);
         }).orElseThrow(()->new RuntimeException("Ticket not found"));
-        return Optional.empty();
     }
 
     @Override

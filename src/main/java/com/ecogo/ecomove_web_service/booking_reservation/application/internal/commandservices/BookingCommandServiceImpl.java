@@ -29,14 +29,13 @@ public class BookingCommandServiceImpl implements BookingCommandService { // Ser
 
     @Override
     public Optional<Booking> handle(CreateBookingCommand command){
-        externalUserService.fetchUserById(command.userId()).map(user -> {
+        return externalUserService.fetchUserById(command.userId()).map(user -> {
             EcoVehicle vehicle = externalEcoVehicleService.fetchEcoVehicleById(command.vehicleId())
                     .orElseThrow(()-> new RuntimeException("Vehicle with id: " + command.vehicleId() + " not found"));
             Booking booking = new Booking(user, vehicle, command.startTime(), command.endTime());
             booking = bookingRepository.save(booking);
-            return booking;
+            return Optional.of(booking);
         }).orElseThrow(() -> new RuntimeException("User with id: " + command.userId() + " not found"));
-        return Optional.empty();
     }
 
     @Override

@@ -23,6 +23,7 @@ public class CustomerSupportAgentCommandServiceImpl implements CustomerSupportAg
             throw new RuntimeException("There is already a customer support agent with that name");
         }
         CustomerSupportAgent customerSupportAgent = new CustomerSupportAgent(command.email(), command.firstName(), command.lastName());
+        customerSupportAgent = customerSupportAgentRepository.save(customerSupportAgent);
         return Optional.of(customerSupportAgent);
     }
 

@@ -1,12 +1,15 @@
 package com.ecogo.ecomove_web_service.payment.interfaces.rest.resources;
 
-public record CreateTransactionResource(Long userId, Float amount) {
-    public CreateTransactionResource {
-        if (userId == null) {
-            throw new IllegalArgumentException("userId cannot be null");
-        }
-        if (amount == null) {
-            throw new IllegalArgumentException("amount cannot be null");
-        }
-    }
+import jakarta.validation.constraints.NotNull;
+
+import java.time.LocalDateTime;
+
+public record CreateTransactionResource(
+        @NotNull
+        Long userId,
+        @NotNull
+        Float amount,
+        @NotNull
+        LocalDateTime date
+) {
 }

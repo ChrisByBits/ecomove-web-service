@@ -5,6 +5,9 @@ import com.ecogo.ecomove_web_service.payment.domain.model.commands.CreateTransac
 
 import java.util.Optional;
 
+/**
+ * Service to handle transaction commands
+ */
 public interface TransactionCommandService {
     Optional<Transaction> handle(CreateTransactionCommand command);
 }

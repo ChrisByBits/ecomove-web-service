@@ -1,42 +1,36 @@
 package com.ecogo.ecomove_web_service.payment.domain.model.aggregates;
 
-import com.ecogo.ecomove_web_service.payment.domain.model.commands.CreateTransactionCommand;
+import com.ecogo.ecomove_web_service.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
+import com.ecogo.ecomove_web_service.user_management.domain.model.aggregates.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.domain.AbstractAggregateRoot;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Getter
 @Entity
-@EntityListeners(AuditingEntityListener.class)
-public class Transaction extends AbstractAggregateRoot<Transaction> {
-
+public class Transaction extends AuditableAbstractAggregateRoot<Transaction> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    private Long transactionId;
+    private Long id;
+
+    @OneToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
     @Column(nullable = false)
-    @Getter
-    private Long userId;
-
-    @Column(nullable = false)
-    @Getter
     private Float amount;
 
-    @CreatedDate
-    @Column(nullable = false)
-    @Getter
+    @Column(nullable = false, updatable = false)
     private LocalDateTime date;
 
-    protected Transaction() {}
+    public Transaction(){
 
-    public Transaction(CreateTransactionCommand command) {
-        this.userId = command.userId();
-        this.amount = command.amount();
     }
-
+    public Transaction(User user, Float amount, LocalDateTime date){
+        this.user = user;
+        this.amount = amount;
+        this.date = date;
+    }
 }

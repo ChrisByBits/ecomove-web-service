@@ -5,6 +5,6 @@ import com.ecogo.ecomove_web_service.vehicle_management.interfaces.rest.resource
 
 public class CreateEcoVehicleCommandFromResourceAssembler {
     public static CreateEcoVehicleCommand toCommandFromResource(CreateEcoVehicleResource resource){
-        return new CreateEcoVehicleCommand(resource.type(), resource.model(), resource.batteryLevel(), resource.location(), resource.status());
+        return new CreateEcoVehicleCommand(resource.type(), resource.model(), resource.batteryLevel(), resource.longitude(), resource.latitude(), resource.status(), resource.imageUrl());
     }
 }

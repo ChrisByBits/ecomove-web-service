@@ -11,6 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class EcoVehicle extends AuditableAbstractAggregateRoot<EcoVehicle> {
@@ -39,12 +40,21 @@ public class EcoVehicle extends AuditableAbstractAggregateRoot<EcoVehicle> {
     /** The location of the EcoVehicle */
     @Column(nullable = false)
     @Getter
-    private String location;
+    private Double longitude;
+
+    @Column(nullable = false)
+    @Getter
+    private Double latitude;
 
     /** The status of the EcoVehicle */
     @Column(nullable = false)
     @Getter
     private String status;
+
+    /** The imageUrl of the EcoVehicle */
+    @Column(nullable = false)
+    @Getter
+    private String imageUrl;
 
     /** The date when the EcoVehicle was created */
 //    @CreatedDate
@@ -67,7 +77,9 @@ public class EcoVehicle extends AuditableAbstractAggregateRoot<EcoVehicle> {
         this.type = command.type();
         this.model = command.model();
         this.batteryLevel = command.batteryLevel();
-        this.location = command.location();
+        this.longitude = command.longitude();
+        this.latitude = command.latitude();
         this.status = command.status();
+        this.imageUrl = command.imageUrl();
     }
 }

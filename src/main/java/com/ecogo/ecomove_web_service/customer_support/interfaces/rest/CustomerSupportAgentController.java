@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -35,7 +36,7 @@ public class CustomerSupportAgentController {
     @PostMapping
     public ResponseEntity<CustomerSupportAgentResource> createCustomerSupportAgent(@RequestBody CreateCustomerSupportAgentResource resource){
         Optional<CustomerSupportAgent> customerSupportAgent = customerSupportAgentCommandService.handle(CreateCustomerSupportAgentCommandFromResourceAssembler.toCommandFromResource(resource));
-        return customerSupportAgent.map(source -> new ResponseEntity<>(CustomerSupportAgentResourceFromEntityAssembler.toResourceFromEntity(source),OK)).orElseGet(() -> ResponseEntity.notFound().build());
+        return customerSupportAgent.map(source -> new ResponseEntity<>(CustomerSupportAgentResourceFromEntityAssembler.toResourceFromEntity(source), CREATED)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @Operation(summary = "Get all customer support agents", description = "Returns all the customer support agents stored in the database")
