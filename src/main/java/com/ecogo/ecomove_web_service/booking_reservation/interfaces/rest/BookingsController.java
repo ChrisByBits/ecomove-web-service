@@ -34,6 +34,7 @@ public class BookingsController {
 
     @Operation(summary = "Create a new booking", description = "Creates a new booking with the specified attributes")
     @PostMapping
+    @CrossOrigin(origins = "*")
     public ResponseEntity<BookingResource> createBooking(@RequestBody CreateBookingResource resource){
         Optional<Booking> booking = bookingCommandService.handle(CreateBookingCommandFromResourceAssembler.toCommandFromResource(resource));
         return booking.map(source -> new ResponseEntity<>(BookingResourceFromEntityAssembler.toResourceFromEntity(source), CREATED)).orElseGet(() -> ResponseEntity.badRequest().build());
@@ -41,6 +42,7 @@ public class BookingsController {
 
     @Operation(summary = "Get booking by Id", description = "Returns the booking with the specified id")
     @GetMapping("{id}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<BookingResource> getBookingById(@PathVariable Long id){
         Optional<Booking> booking = bookingQueryService.handle(new GetBookingByIdQuery(id));
         return booking.map(source -> new ResponseEntity<>(BookingResourceFromEntityAssembler.toResourceFromEntity(source), OK)).orElseGet(() -> ResponseEntity.notFound().build());
@@ -48,6 +50,7 @@ public class BookingsController {
 
     @Operation (summary = "Get all bookings", description = "Returns all the bookings in the database")
     @GetMapping
+    @CrossOrigin(origins = "*")
     public ResponseEntity<List<BookingResource>> getBookings(){
         var getAllBookingsQuery = new GetAllBookingsQuery();
         var bookings = bookingQueryService.handle(getAllBookingsQuery);
@@ -58,6 +61,7 @@ public class BookingsController {
 
     @Operation (summary = "Get all bookings by user id", description = "Returns all the bookings in the database by user id")
     @GetMapping("user/{userId}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<List<BookingResource>> getAllBookingsByUserId(@PathVariable Long userId){
         var getAllBookingsByUserIdQuery = new GetAllBookingsByUserIdQuery(userId);
         var bookings = bookingQueryService.handle(getAllBookingsByUserIdQuery);
@@ -68,6 +72,7 @@ public class BookingsController {
 
     @Operation (summary = "Get all bookings by vehicle id", description = "Returns all the bookings in the database by vehicle id")
     @GetMapping("vehicle/{vehicleId}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<List<BookingResource>> getAllBookingsByVehicleId(@PathVariable Long vehicleId){
         var getAllBookingsByVehicleIdQuery = new GetAllBookingsByVehicleIdQuery(vehicleId);
         var bookings = bookingQueryService.handle(getAllBookingsByVehicleIdQuery);
