@@ -3,6 +3,7 @@ RUN apt-get update
 RUN apt-get install openjdk-21-jdk -y
 
 COPY . .
+RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
 FROM openjdk:21-jdk
