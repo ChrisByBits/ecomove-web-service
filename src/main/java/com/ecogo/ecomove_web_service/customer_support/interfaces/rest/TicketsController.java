@@ -27,8 +27,8 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/api/v1/tickets")
-@Tag(name="Tickets", description = "Tickets Management Endpoints")
 @CrossOrigin(origins = "*")
+@Tag(name="Tickets", description = "Tickets Management Endpoints")
 public class TicketsController {
 
     private final TicketCommandService ticketCommandService;
