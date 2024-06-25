@@ -12,9 +12,11 @@ import com.ecogo.ecomove_web_service.vehicle_management.domain.model.aggregates.
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+/**
+ * Service to handle booking commands and interact with external services
+ */
 @Service
-public class BookingCommandServiceImpl implements BookingCommandService {
+public class BookingCommandServiceImpl implements BookingCommandService { // Service for handling booking commands
     private final BookingRepository bookingRepository;
     private final ExternalUserServiceToBooking externalUserService;
     private final ExternalEcoVehicleServiceToBooking externalEcoVehicleService;

@@ -1,7 +1,8 @@
 package com.ecogo.ecomove_web_service.vehicle_management.domain.model.commands;
 
 /**
- * Command to create an EcoVehicle
+ * CreateEcoVehicleCommand
+ * <p> Command to create an EcoVehicle </p>
  * @param type the type of the vehicle
  * @param model the model of the vehicle
  * @param batteryLevel the battery level of the vehicle

@@ -8,6 +8,7 @@ import com.ecogo.ecomove_web_service.booking_reservation.interfaces.rest.resourc
 import com.ecogo.ecomove_web_service.booking_reservation.interfaces.rest.resources.CreateBookingResource;
 import com.ecogo.ecomove_web_service.booking_reservation.interfaces.rest.transform.BookingResourceFromEntityAssembler;
 import com.ecogo.ecomove_web_service.booking_reservation.interfaces.rest.transform.CreateBookingCommandFromResourceAssembler;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,18 +32,21 @@ public class BookingsController {
         this.bookingQueryService = bookingQueryService;
     }
 
+    @Operation(summary = "Create a new booking", description = "Creates a new booking with the specified attributes")
     @PostMapping
     public ResponseEntity<BookingResource> createBooking(@RequestBody CreateBookingResource resource){
         Optional<Booking> booking = bookingCommandService.handle(CreateBookingCommandFromResourceAssembler.toCommandFromResource(resource));
         return booking.map(source -> new ResponseEntity<>(BookingResourceFromEntityAssembler.toResourceFromEntity(source), CREATED)).orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
+    @Operation(summary = "Get booking by Id", description = "Returns the booking with the specified id")
     @GetMapping("{id}")
     public ResponseEntity<BookingResource> getBookingById(@PathVariable Long id){
         Optional<Booking> booking = bookingQueryService.handle(new GetBookingByIdQuery(id));
         return booking.map(source -> new ResponseEntity<>(BookingResourceFromEntityAssembler.toResourceFromEntity(source), OK)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @Operation (summary = "Get all bookings", description = "Returns all the bookings in the database")
     @GetMapping
     public ResponseEntity<List<BookingResource>> getBookings(){
         var getAllBookingsQuery = new GetAllBookingsQuery();
@@ -52,6 +56,7 @@ public class BookingsController {
         return ResponseEntity.ok(bookingResources);
     }
 
+    @Operation (summary = "Get all bookings by user id", description = "Returns all the bookings in the database by user id")
     @GetMapping("user/{userId}")
     public ResponseEntity<List<BookingResource>> getAllBookingsByUserId(@PathVariable Long userId){
         var getAllBookingsByUserIdQuery = new GetAllBookingsByUserIdQuery(userId);
@@ -61,6 +66,7 @@ public class BookingsController {
         return ResponseEntity.ok(bookingResources);
     }
 
+    @Operation (summary = "Get all bookings by vehicle id", description = "Returns all the bookings in the database by vehicle id")
     @GetMapping("vehicle/{vehicleId}")
     public ResponseEntity<List<BookingResource>> getAllBookingsByVehicleId(@PathVariable Long vehicleId){
         var getAllBookingsByVehicleIdQuery = new GetAllBookingsByVehicleIdQuery(vehicleId);
@@ -70,6 +76,7 @@ public class BookingsController {
         return ResponseEntity.ok(bookingResources);
     }
 
+    @Operation (summary = "Get all bookings by user id and vehicle id", description = "Returns all the bookings in the database by user id and vehicle id")
     @GetMapping("user/{userId}/vehicle/{vehicleId}")
     public ResponseEntity<List<BookingResource>> getAllBookingsByUserIdAndVehicleId(@PathVariable Long userId,@PathVariable Long vehicleId){
         var getAllBookingsByUserIdAndVehicleIdQuery = new GetAllBookingsByUserIdAndVehicleIdQuery(userId, vehicleId);
@@ -78,19 +85,6 @@ public class BookingsController {
         var bookingResources = bookings.stream().map(BookingResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(bookingResources);
     }
-
-//    @GetMapping
-//    public ResponseEntity<?> getBookingsWithParameters(@RequestParam(name = "RequestParameters") Map<String, Long> params) {
-//        if (params.containsKey("userId") && params.containsKey("vehicleId")) {
-//            return getAllBookingsByUserIdAndVehicleId(params.get("userId"), params.get("vehicleId"));
-//        } else if (params.containsKey("userId")) {
-//            return getAllBookingsByUserId(params.get("userId"));
-//        } else if (params.containsKey("vehicleId")) {
-//            return getAllBookingsByVehicleId(params.get("vehicleId"));
-//        } else {
-//            return getBookings();
-//        }
-//    }
 }
 
 

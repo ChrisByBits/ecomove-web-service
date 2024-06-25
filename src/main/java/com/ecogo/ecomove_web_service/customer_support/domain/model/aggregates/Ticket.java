@@ -10,6 +10,7 @@ import lombok.Getter;
 @Getter
 @Entity
 public class Ticket extends AuditableAbstractAggregateRoot<Ticket> {
+    /** The unique identifier of the ticket */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

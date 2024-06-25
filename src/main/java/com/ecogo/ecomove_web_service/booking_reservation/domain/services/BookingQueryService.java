@@ -5,7 +5,9 @@ import com.ecogo.ecomove_web_service.booking_reservation.domain.model.queries.*;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Service to handle booking queries
+ */
 public interface BookingQueryService {
     List<Booking> handle(GetAllBookingsByUserIdQuery query);
 

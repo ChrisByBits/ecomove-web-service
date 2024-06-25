@@ -6,7 +6,9 @@ import com.ecogo.ecomove_web_service.customer_support.domain.model.queries.GetCu
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Service to handle customer support agent queries
+ */
 public interface CustomerSupportAgentQueryService {
     List<CustomerSupportAgent> handle(GetAllCustomerSupportAgentQuery query);
 

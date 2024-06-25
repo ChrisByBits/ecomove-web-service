@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+/**
+ * Service to handle customer support agent queries
+ */
 
 @Service
 public class CustomerSupportAgentQueryServiceImpl implements CustomerSupportAgentQueryService {

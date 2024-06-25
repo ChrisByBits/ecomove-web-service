@@ -1,5 +1,6 @@
 package com.ecogo.ecomove_web_service.vehicle_management.domain.model.aggregates;
 
+import com.ecogo.ecomove_web_service.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import com.ecogo.ecomove_web_service.vehicle_management.domain.model.commands.CreateEcoVehicleCommand;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,13 +13,13 @@ import java.util.Date;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class EcoVehicle extends AbstractAggregateRoot<EcoVehicle> {
+public class EcoVehicle extends AuditableAbstractAggregateRoot<EcoVehicle> {
 
     /** The unique identifier of the EcoVehicle */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    private Long ecoVehicleId;
+    private Long id;
 
     /** The type of the EcoVehicle */
     @Column(nullable = false)
@@ -46,14 +47,15 @@ public class EcoVehicle extends AbstractAggregateRoot<EcoVehicle> {
     private String status;
 
     /** The date when the EcoVehicle was created */
-    @CreatedDate
-    @Column(nullable = false, updatable = false)
-    private Date createdAt;
-
-    /** The date when the EcoVehicle was last updated */
-    @LastModifiedDate
-    @Column(nullable = false, updatable = false)
-    private Date updatedAt;
+//    @CreatedDate
+//    @Column(nullable = false, updatable = false)
+//    private Date createdAt;
+//
+//    /** The date when the EcoVehicle was last updated */
+//    @LastModifiedDate
+//    @Column(nullable = false, updatable = false)
+//    private Date updatedAt;
+//
 
     protected EcoVehicle(){}
 

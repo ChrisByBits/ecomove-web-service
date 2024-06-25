@@ -5,7 +5,9 @@ import com.ecogo.ecomove_web_service.vehicle_management.interfaces.acl.EcoVehicl
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+/**
+ * Service to handle an external service
+ */
 @Service
 public class ExternalEcoVehicleServiceToBooking {
     private final EcoVehicleContextFacade ecoVehicleContextFacade;

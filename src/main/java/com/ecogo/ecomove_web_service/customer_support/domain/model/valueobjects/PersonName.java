@@ -1,7 +1,11 @@
 package com.ecogo.ecomove_web_service.customer_support.domain.model.valueobjects;
 
 import jakarta.persistence.Embeddable;
-
+/**
+ * Value object for person names
+ * @param firstName the first name
+ * @param lastName the last name
+ */
 @Embeddable
 public record PersonName(String firstName, String lastName) {
     public PersonName() { this(null, null); }
