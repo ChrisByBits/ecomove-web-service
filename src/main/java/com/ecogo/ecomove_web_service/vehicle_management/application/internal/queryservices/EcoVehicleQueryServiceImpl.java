@@ -59,6 +59,16 @@ public class EcoVehicleQueryServiceImpl implements EcoVehicleQueryService {
     }
 
     /**
+     * Handles the GetAllEcoVehicleQuery query
+     * @param query the GetAllEcoVehicleQuery query
+     * @return - a List of EcoVehicle
+     */
+    @Override
+    public List<EcoVehicle> handle(GetAllEcoVehicleQuery query){
+        return ecoVehicleRepository.findAll();
+    }
+
+    /**
      * Handles the GetEcoVehicleByIdQuery query
      * @param query the GetEcoVehicleByIdQuery query
      * @return - an Optional of EcoVehicle

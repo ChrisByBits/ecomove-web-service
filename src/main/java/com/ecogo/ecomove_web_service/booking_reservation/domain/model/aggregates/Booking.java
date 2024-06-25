@@ -11,28 +11,32 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
 
-@Getter
 @Entity
 public class Booking extends AuditableAbstractAggregateRoot<Booking> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private Long id;
 
     @ManyToOne
     @JoinColumn(name="user_id")
+    @Getter
     private User user;
 
     @ManyToOne
     @JoinColumn(name="vehicle_id")
+    @Getter
     private EcoVehicle vehicle;
 
     @Column(nullable = false, updatable = false)
+    @Getter
     private Date startTime;
 
     @Column(nullable = false)
+    @Getter
     private Date endTime;
 
-    @Column(nullable = false)
+
     private BookingStatus status;
 
     public Booking(){

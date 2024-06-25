@@ -41,7 +41,7 @@ public class UsersController {
     }
 
     @Operation(summary = "Get user by username", description = "Returns the user with the specified username")
-    @GetMapping("{username}")
+    @GetMapping("username/{username}")
     public ResponseEntity<UserResource> getUserByUsername(@PathVariable String username) {
         Optional<User> user = userQueryService.handle(new GetUserByUsernameQuery(username));
         return user.map(u -> new ResponseEntity<>(UserResourceFromEntityAssembler.fromEntity(u), OK))
@@ -49,7 +49,7 @@ public class UsersController {
     }
 
     @Operation(summary = "Get user by id", description = "Returns the user with the specified id")
-    @GetMapping("{id}")
+    @GetMapping("id/{id}")
     public ResponseEntity<UserResource> getUserById(@PathVariable Long id) {
         Optional<User> user = userQueryService.handle(new GetUserByIdQuery(id));
         return user.map(u -> new ResponseEntity<>(UserResourceFromEntityAssembler.fromEntity(u), OK))

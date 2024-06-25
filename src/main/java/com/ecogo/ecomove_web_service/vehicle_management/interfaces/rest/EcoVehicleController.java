@@ -21,7 +21,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping("/api/v1/eco-vehicle")
+@RequestMapping("/api/v1/eco-vehicles")
 @Tag(name="EcoVehicles", description = "EcoVehicles Management Endpoints")
 public class EcoVehicleController {
 
@@ -41,13 +41,21 @@ public class EcoVehicleController {
     }
 
     @Operation(summary = "Get eco vehicles by id", description = "Returns the eco vehicle with the specified id")
-    @GetMapping("{id}")
+    @GetMapping("id/{id}")
     public ResponseEntity<EcoVehicleResource> getEcoVehicleById(@PathVariable Long id){
         Optional<EcoVehicle> ecoVehicle = ecoVehicleQueryService.handle(new GetEcoVehicleByIdQuery(id));
         return ecoVehicle.map(source -> new ResponseEntity<>(EcoVehicleResourceFromEntityAssembler.toResourceFromEntity(source), OK)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "Get all eco vehicles", description = "Returns all the eco vehicles in the database")
+
+    private ResponseEntity<List<EcoVehicleResource>> getAllEcoVehicles(){
+        var getAllEcoVehiclesQuery = new GetAllEcoVehicleQuery();
+        var ecoVehicles = ecoVehicleQueryService.handle(getAllEcoVehiclesQuery);
+        if (ecoVehicles.isEmpty()) return ResponseEntity.notFound().build();
+        var ecoVehicleResources = ecoVehicles.stream().map(EcoVehicleResourceFromEntityAssembler::toResourceFromEntity).toList();
+        return ResponseEntity.ok(ecoVehicleResources);
+    }
+
     private ResponseEntity<List<EcoVehicleResource>> getAllEcoVehiclesByType(String type){
         var getAllEcoVehicleByTypeQuery = new GetAllEcoVehicleByTypeQuery(type);
         var ecoVehicles = ecoVehicleQueryService.handle(getAllEcoVehicleByTypeQuery);
@@ -95,7 +103,7 @@ public class EcoVehicleController {
         else if (params.containsKey("batteryLevel")){
             return getAllEcoVehiclesByBatteryLevelGreaterThan(Integer.parseInt(params.get("batteryLevel")));
         }else{
-            return ResponseEntity.badRequest().build();
+            return getAllEcoVehicles();
         }
     }
 }

@@ -10,6 +10,6 @@ import java.util.Date;
  * @param endTime the end time of the booking
  * @param status the status of the booking
  */
-public record BookingResource(Long bookingId, Long userId, Long vehicleId, Date startTime, Date endTime,String status) {
+public record BookingResource(Long bookingId, Long userId, Long vehicleId, Date startTime, Date endTime, String status) {
 
 }

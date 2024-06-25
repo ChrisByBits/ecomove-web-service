@@ -11,6 +11,8 @@ public interface EcoVehicleQueryService {
     List<EcoVehicle> handle(GetAllEcoVehicleByTypeAndModelQuery query);
     List<EcoVehicle> handle(GetAllEcoVehicleByTypeAndStatusQuery query);
     List<EcoVehicle> handle(GetAllEcoVehicleByTypeQuery query);
+
+    List<EcoVehicle> handle(GetAllEcoVehicleQuery query);
     Optional<EcoVehicle> handle(GetEcoVehicleByIdQuery query);
 
 }
