@@ -36,6 +36,7 @@ public class EcoVehicleController {
 
     @Operation(summary = "Create a new eco vehicle", description = "Creates a new eco vehicle with the specified attributes")
     @PostMapping
+    @CrossOrigin(origins = "*")
     public ResponseEntity<EcoVehicleResource> createEcoVehicle(@RequestBody CreateEcoVehicleResource resource){
         Optional<EcoVehicle> ecoVehicle = ecoVehicleCommandService.handle(CreateEcoVehicleCommandFromResourceAssembler.toCommandFromResource(resource));
         return ecoVehicle.map(source -> new ResponseEntity<>(EcoVehicleResourceFromEntityAssembler.toResourceFromEntity(source), CREATED)).orElseGet(() -> ResponseEntity.badRequest().build());
@@ -43,6 +44,7 @@ public class EcoVehicleController {
 
     @Operation(summary = "Get eco vehicles by id", description = "Returns the eco vehicle with the specified id")
     @GetMapping("id/{id}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<EcoVehicleResource> getEcoVehicleById(@PathVariable Long id){
         Optional<EcoVehicle> ecoVehicle = ecoVehicleQueryService.handle(new GetEcoVehicleByIdQuery(id));
         return ecoVehicle.map(source -> new ResponseEntity<>(EcoVehicleResourceFromEntityAssembler.toResourceFromEntity(source), OK)).orElseGet(() -> ResponseEntity.notFound().build());
@@ -91,6 +93,7 @@ public class EcoVehicleController {
 
     @Operation(summary="Get eco vehicles with parameters", description = "Returns the eco vehicles with the specified parameters")
     @GetMapping
+    @CrossOrigin(origins = "*")
     public ResponseEntity<?> getEcoVehiclesWithParameters(@RequestParam Map<String, String> params){
         if(params.containsKey("type") && params.containsKey("model")){
             return getAllEcoVehiclesByTypeAndModel(params.get("type"), params.get("model"));
