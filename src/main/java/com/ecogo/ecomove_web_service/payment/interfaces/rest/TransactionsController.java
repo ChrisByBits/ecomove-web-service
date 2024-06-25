@@ -26,6 +26,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequestMapping("/api/v1/transactions")
 @Tag(name="Transactions", description = "Transactions Management Endpoints")
+@CrossOrigin(origins = "*")
 public class TransactionsController {
     private final TransactionQueryService transactionQueryService;
     private final TransactionCommandService transactionCommandService;

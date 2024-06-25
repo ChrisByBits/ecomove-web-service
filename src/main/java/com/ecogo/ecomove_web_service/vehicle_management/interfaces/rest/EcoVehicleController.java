@@ -22,6 +22,7 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/api/v1/eco-vehicles")
+@CrossOrigin(origins = "*")
 @Tag(name="EcoVehicles", description = "EcoVehicles Management Endpoints")
 public class EcoVehicleController {
 

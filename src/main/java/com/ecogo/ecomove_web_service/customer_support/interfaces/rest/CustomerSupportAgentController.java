@@ -23,6 +23,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequestMapping("/api/v1/customer-support-agents")
 @Tag(name="Customer Support Agents", description = "Customer Support Agents Management Endpoints")
+@CrossOrigin(origins = "*")
 public class CustomerSupportAgentController {
     CustomerSupportAgentCommandService customerSupportAgentCommandService;
     CustomerSupportAgentQueryService customerSupportAgentQueryService;

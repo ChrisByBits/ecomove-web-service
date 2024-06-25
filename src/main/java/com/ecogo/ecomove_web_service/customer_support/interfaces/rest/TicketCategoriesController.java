@@ -22,6 +22,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequestMapping("/api/v1/ticket-categories")
 @Tag(name="Tickets Categories", description = "Tickets Categories Management Endpoints")
+@CrossOrigin(origins = "*")
 public class TicketCategoriesController {
 
     TicketQueryService ticketQueryService;

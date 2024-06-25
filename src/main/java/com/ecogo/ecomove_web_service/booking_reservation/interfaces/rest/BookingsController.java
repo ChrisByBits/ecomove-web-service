@@ -22,6 +22,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequestMapping(value="/api/v1/bookings")
 @Tag(name="Bookings", description = "Bookings Management Endpoints")
+@CrossOrigin(origins = "*")
 public class BookingsController {
     private final BookingCommandService bookingCommandService;
     private final BookingQueryService bookingQueryService;
