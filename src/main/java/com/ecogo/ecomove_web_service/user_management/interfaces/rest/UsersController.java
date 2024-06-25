@@ -25,7 +25,6 @@ import static org.springframework.http.HttpStatus.OK;
 public class UsersController {
     private final UserCommandService userCommandService;
     private final UserQueryService userQueryService;
-    commands
 
     public UsersController(UserCommandService userCommandService, UserQueryService userQueryService) {
         this.userCommandService = userCommandService;

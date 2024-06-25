@@ -1,7 +1,7 @@
 package com.ecogo.ecomove_web_service.customer_support.interfaces.rest;
 
 
-import com.ecogo.ecomove_web_service.customer_support.domain.model.aggrgates.Ticket;
+import com.ecogo.ecomove_web_service.customer_support.domain.model.aggregates.Ticket;
 import com.ecogo.ecomove_web_service.customer_support.domain.model.queries.GetTicketByIdQuery;
 import com.ecogo.ecomove_web_service.customer_support.domain.services.TicketCommandService;
 import com.ecogo.ecomove_web_service.customer_support.domain.services.TicketQueryService;
