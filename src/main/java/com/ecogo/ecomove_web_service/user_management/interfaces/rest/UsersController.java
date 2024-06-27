@@ -1,6 +1,9 @@
 package com.ecogo.ecomove_web_service.user_management.interfaces.rest;
 
+import com.ecogo.ecomove_web_service.booking_reservation.domain.model.queries.GetAllBookingsQuery;
+import com.ecogo.ecomove_web_service.booking_reservation.interfaces.rest.transform.BookingResourceFromEntityAssembler;
 import com.ecogo.ecomove_web_service.user_management.domain.model.aggregates.User;
+import com.ecogo.ecomove_web_service.user_management.domain.model.queries.GetAllUsersQuery;
 import com.ecogo.ecomove_web_service.user_management.domain.model.queries.GetUserByIdQuery;
 import com.ecogo.ecomove_web_service.user_management.domain.model.queries.GetUserByUsernameQuery;
 import com.ecogo.ecomove_web_service.user_management.domain.services.UserCommandService;
@@ -14,6 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -40,6 +44,17 @@ public class UsersController {
         return user.map(u -> new ResponseEntity<>(UserResourceFromEntityAssembler.fromEntity(u), CREATED))
                 .orElseGet(() -> ResponseEntity.badRequest().build());
 
+    }
+
+    @Operation(summary = "Get all users", description = "Returns all the users in the database")
+    @GetMapping
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<List<UserResource>> getAllUsers() {
+        var getAllUsersQuery = new GetAllUsersQuery();
+        var users = userQueryService.handle(getAllUsersQuery);
+        if (users.isEmpty()) return ResponseEntity.notFound().build();
+        var userResources = users.stream().map(UserResourceFromEntityAssembler::fromEntity).toList();
+        return ResponseEntity.ok(userResources);
     }
 
     @Operation(summary = "Get user by username", description = "Returns the user with the specified username")
